@@ -47,7 +47,6 @@ void pvec(const std::vector<T> & vec) {
  *           0..|V|-1 is convenient and efficient for algorithm 
  *           implementation of many algorithms.
  *
- *       ref:  see the read_file function (which reads edges as string pairs).
  *
  *   - mapping between vertex names and vertex-IDs:
  *       the graph class has a data member called _name2id which is an 
@@ -94,12 +93,6 @@ class graph {
 
   private:
 
-    // note:  this struct does not store both
-    //   vertices in the edge -- just one.  This
-    //   is because of the overall structure of
-    //   the adjacency list organization:  an
-    //   edge struct is stored in a vector associated
-    //   with the other vertex.
     struct edge {
       int vertex_id;
       double weight;
@@ -122,7 +115,7 @@ class graph {
     };
 
     /**************************************************
-    *   Data members of the Graph class here!
+    *   Data members of the Graph class here
     *
     *   Everything about a graph is accessible via
     *    these three data structures
@@ -200,7 +193,7 @@ class graph {
      * returns concatenation of src and dest vertex strings with
      * a single space between
      *
-     * Purpos:  gives a unique string representing the edge
+     * Purpose:  gives a unique string representing the edge
      * -- data member edges stores sets of such strings to
      * quickly detect if an edge has already been created.
      *
@@ -367,12 +360,10 @@ class graph {
       }
       else {
         if(!(std::stringstream(weight_str) >> weight)){
-          // couldn't parse weight
           return false;
         }
 
         if(ss >> junk){
-          // extra token?  format error
           return false;
         }
       }
@@ -472,16 +463,7 @@ class graph {
 
 
   public:
-    /* 
-     * TODO 10 points
-     *
-     * modify bfs so that vertex labels reflect the NUMBER OF 
-     *   SHORTEST PATHS TO THE VERTEX LABELED:
-     *
-     *     report[u].npaths is assigned the number of shortest 
-     *        paths from src to u.
-     *
-     */   
+  
     bool bfs(int src, std::vector<vertex_label> &report) {
       int u, v;
       std::queue<int> q;
@@ -783,8 +765,6 @@ class graph {
      *           rpt[u].npaths = number of io-paths passing through
      *                            vertex u.
      *
-     *           Recall: an IO path starts at an input vertex and
-     *             ends at an output vertex.
      *
      *           This value is defined for all vertices u in the
      *             graph (inputs, outputs and "intermediate" nodes).
@@ -914,10 +894,6 @@ class graph {
      * details:  Given a DAG and vertex target in the graph, the
      *   vector paths is populated with ALL input paths ending at
      *   vertex target.
-     *
-     * [NOTE:  target vertex is passed as its integer ID; however,
-     *   vertices in paths constructed are represented by their 
-     *   name -- as a string]
      *
      * A path is represented as a string containing the names of
      * each vertex (NOT intger vertex IDs) on the path in sequence; 
