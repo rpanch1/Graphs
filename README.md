@@ -1,5 +1,5 @@
 # Graphs
-Data Structures - Project 5
+Data Structures
 
 This program has the implementation of the Graph class with these main member functions:
 
